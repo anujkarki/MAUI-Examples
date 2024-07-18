@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAuthenticator.Server", "WebAuthenticator.Server.csproj", "{BA8C6702-827E-43F3-8601-96EA3198DD3F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA8C6702-827E-43F3-8601-96EA3198DD3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA8C6702-827E-43F3-8601-96EA3198DD3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA8C6702-827E-43F3-8601-96EA3198DD3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA8C6702-827E-43F3-8601-96EA3198DD3F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9CFE785A-DFBE-4CBB-8F06-D86F357F8FA1}
+	EndGlobalSection
+EndGlobal
