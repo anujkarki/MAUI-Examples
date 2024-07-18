@@ -29,4 +29,4 @@ jobs:
       with:
         name: web-app
         path: |
-          WebAuthenticator/WebAuthenticator.Server/bin  # Adjust this path to your publish output
+          WebAuthenticator/WebAuthenticator.Server  # Adjust this path to your publish output
