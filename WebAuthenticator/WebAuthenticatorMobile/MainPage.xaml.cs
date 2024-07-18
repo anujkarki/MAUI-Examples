@@ -16,11 +16,12 @@
                 try
                 {
                     WebAuthenticatorResult authResult = await WebAuthenticator.Default.AuthenticateAsync(
-                        new Uri("http://asptest.runasp.net/mobileauth/Google"),
+                        new Uri("http://asptest.runasp.net/Authenticate/Google"),
                         new Uri("webauthenticatormobile://"));
 
                     string accessToken = authResult?.AccessToken;
 
+                    await DisplayAlert("Access Token", accessToken, "Ok");
                     // Do something with the token
                 }
                 catch (TaskCanceledException e)

@@ -11,9 +11,10 @@ namespace WebAuthenticator.Server.Controllers
     {
         const string callbackScheme = "webauthenticatormobile";
 
-        [HttpGet("{scheme}")]
-        public async Task Get([FromRoute] string scheme)
+        [HttpGet("Google")]
+        public async Task Google()
         {
+            string scheme = "Google";
             var auth = await Request.HttpContext.AuthenticateAsync(scheme);
 
             if (!auth.Succeeded
