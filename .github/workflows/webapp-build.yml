@@ -1,0 +1,57 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name as needed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0.x'  # Specify the version of .NET Core SDK
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Publish Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: web-app
+        path: ./WebAuthenticator/WebAuthenticator.Server/bin  # Adjust this path to your publish output
+
+  release:
+    needs: build
+    if: github.ref == 'refs/heads/main'  # Only create a release on main branch
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Download Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: web-app
+        path: ./WebAuthenticator/WebAuthenticator.Server/bin  # Specify the path where artifacts were uploaded
+
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        files: |
+          ./WebAuthenticator/WebAuthenticator.Server/bin/*  # Adjust this path based on artifact structure
+        tag_name: ${{ github.sha }}
+        release_name: Release ${{ github.sha }}
+        draft: false
+        prerelease: false
