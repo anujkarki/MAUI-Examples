@@ -29,19 +29,4 @@ jobs:
       with:
         name: web-app
         path: |
-          WebAuthenticator/WebAuthenticator.Server/Path/To/Published/Files  # Adjust this path to your publish output
-
-  # Optionally, you can add a step to notify Slack or other tools about the build result
-  notify:
-    if: always()
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      with:
-        status: ${{ job.status }}
-        mention: here
-        message: 'Build ${GITHUB_RUN_ID} completed for ${GITHUB_REPOSITORY}:${GITHUB_REF}'
+          WebAuthenticator/WebAuthenticator.Server/bin  # Adjust this path to your publish output
