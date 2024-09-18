@@ -17,9 +17,28 @@ public partial class HomePage : ContentPage
 
     private void InitializeMap()
     {
-        MapView.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        MapView.PinClicked += OnPinClicked;
+        // Example coordinates (latitude and longitude)
+        double latitude = 27.6915; // Replace with your latitude
+        double longitude = 85.3420; // Replace with your longitude
+
+        // Create the map and set a tile layer (OpenStreetMap in this case)
+        var map = new Mapsui.Map
+        {
+            CRS = "EPSG:3857" // Web Mercator projection
+        };
+        map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
+
+        // Convert latitude and longitude to Mapsui's Point object
+        var location = SphericalMercator.FromLonLat(longitude, latitude);
+
+        //var nva = new Navigator().CenterOn(longitude, latitude);
+
+        map.Home = n => n.CenterOn(location.x, location.y);
+
+        MapView.Map = map;
+
         MapView.MapClicked += OnMapClicked;
+        MapView.PinClicked += OnPinClicked;
     }
 
     private void OnMapClicked(object sender, MapClickedEventArgs e)
@@ -38,8 +57,11 @@ public partial class HomePage : ContentPage
         MapView.Pins.Add(_selectedPin);
     }
 
-    private void OnPinClicked(object sender, PinClickedEventArgs e)
+    private async void OnPinClicked(object sender, PinClickedEventArgs e)
     {
+        var item = MapView.Map.Navigator.Resolutions;
+        string message = "Resolution is: " + MapView.Map.Navigator.Resolutions.FirstOrDefault().ToString();
+        await DisplayAlert("Message", message, "ok");
         // You can add custom behavior when a pin is clicked
     }
 
