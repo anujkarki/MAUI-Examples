@@ -6,19 +6,33 @@
 
         public MainPage()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private void btnCheckInternet_Clicked(object sender, EventArgs e)
         {
-            count++;
+            _ = CheckInternetAccess();
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
+        async Task CheckInternetAccess()
+        {
+            string message = string.Empty;
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+
+            if (accessType == NetworkAccess.Internet)
+            {
+                message = "Device has internet access";
+            }
             else
-                CounterBtn.Text = $"Clicked {count} times";
+            {
+                message = "Device has no internet access";
+            }
+            var result = await DisplayAlert("Information!", message, "Close Application", "Okay");
+            if (result)
+            {
+                Application.Current.Quit();
+            }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
         }
     }
 
