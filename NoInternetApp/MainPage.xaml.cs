@@ -22,15 +22,20 @@
             if (accessType == NetworkAccess.Internet)
             {
                 message = "Device has internet access";
+                await DisplayAlert("Information!", message, "Okay");
             }
             else
             {
                 message = "Device has no internet access";
-            }
-            var result = await DisplayAlert("Information!", message, "Close Application", "Okay");
-            if (result)
-            {
-                Application.Current.Quit();
+                var result = await DisplayAlert("Information!", message, "Close Application", "Retry");
+                if (result)
+                {
+                    Application.Current.Quit();
+                }
+                else
+                {
+                    await CheckInternetAccess();
+                }
             }
 
         }
